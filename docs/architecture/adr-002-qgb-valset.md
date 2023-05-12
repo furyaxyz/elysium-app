@@ -69,10 +69,10 @@ message Valset {
 
 ```protobuf
 message MsgSetOrchestratorAddress {
-   // The validator field is a celesvaloper1... string (i.e. sdk.ValAddress)
+   // The validator field is a elyesvaloper1... string (i.e. sdk.ValAddress)
    // that references a validator in the active set
    string validator = 1;
-   // The orchestrator field is a celes1... string  (i.e. sdk.AccAddress) that
+   // The orchestrator field is a elyes1... string  (i.e. sdk.AccAddress) that
    // references the key that is being delegated to
    string orchestrator = 2;
    // This is a hex-encoded 0x Ethereum public key that will be used by this
@@ -96,7 +96,7 @@ it is then possible for anyone to view these signatures in the chain store and s
 message MsgValsetConfirm {
    // Unique number referencing the `ValSet`.
    uint64 nonce = 1;
-   // Orchestrator `celes1` account address.
+   // Orchestrator `elyes1` account address.
    string orchestrator = 2;
    // Ethereum address, associated to the orchestrator, used to sign the `ValSet`
    // message.

@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This module contains the [Quantum Gravity Bridge](https://blog.elysium.org/celestiums/) (QGB) state machine implementation.
+This module contains the [Quantum Gravity Bridge](https://blog.elysium.org/elyestiums/) (QGB) state machine implementation.
 
 ## State machine
 

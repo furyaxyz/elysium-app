@@ -11,7 +11,7 @@ import (
 
 const (
 	evmChainIDFlag      = "evm-chain-id"
-	celesGRPCFlag       = "celes-grpc"
+	elyesGRPCFlag       = "elyes-grpc"
 	evmRPCFlag          = "evm-rpc"
 	contractAddressFlag = "contract-address"
 )
@@ -22,7 +22,7 @@ func addVerifyFlags(cmd *cobra.Command) *cobra.Command {
 	cmd.Flags().StringP(flags.FlagNode, "t", "http://localhost:26657", "<host>:<port> to Tendermint RPC interface for this chain")
 	cmd.Flags().StringP(evmRPCFlag, "e", "http://localhost:8545", "The EVM RPC address")
 	cmd.Flags().StringP(contractAddressFlag, "a", "", "The contract address at which the QGB is deployed")
-	cmd.Flags().StringP(celesGRPCFlag, "c", "localhost:9090", "<host>:<port> To Elysium GRPC address")
+	cmd.Flags().StringP(elyesGRPCFlag, "c", "localhost:9090", "<host>:<port> To Elysium GRPC address")
 
 	return cmd
 }
@@ -47,7 +47,7 @@ func parseVerifyFlags(cmd *cobra.Command) (VerifyConfig, error) {
 	if err != nil {
 		return VerifyConfig{}, err
 	}
-	celesGRPC, err := cmd.Flags().GetString(celesGRPCFlag)
+	elyesGRPC, err := cmd.Flags().GetString(elyesGRPCFlag)
 	if err != nil {
 		return VerifyConfig{}, err
 	}
@@ -70,7 +70,7 @@ func parseVerifyFlags(cmd *cobra.Command) (VerifyConfig, error) {
 	return VerifyConfig{
 		ElysiumChainID: chainID,
 		EVMChainID:      evmChainID,
-		CelesGRPC:       celesGRPC,
+		CelesGRPC:       elyesGRPC,
 		TendermintRPC:   tendermintRPC,
 		EVMRPC:          evmRPC,
 		ContractAddr:    address,
