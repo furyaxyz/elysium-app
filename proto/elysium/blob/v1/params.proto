@@ -1,0 +1,14 @@
+syntax = "proto3";
+package elysium.blob.v1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/furyaxyz/elysium-app/x/blob/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+
+  uint32 gas_per_blob_byte = 3
+      [ (gogoproto.moretags) = "yaml:\"gas_per_blob_byte\"" ];
+}

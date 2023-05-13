@@ -1,0 +1,42 @@
+# stage 1 Generate elysium-appd Binary
+FROM docker.io/golang:1.20.4-alpine3.17 as builder
+
+RUN apk update && \
+    apk upgrade && \
+    apk --no-cache add make gcc musl-dev
+
+ENV HOME /elysium-app
+
+COPY / ${HOME}
+WORKDIR ${HOME}
+
+RUN make build
+
+# stage 2
+FROM docker.io/alpine:3.18.0
+
+RUN apk update && \
+    apk upgrade && \
+    apk --no-cache add curl jq bash
+
+ENV HOME /elysium-app
+COPY --from=builder ${HOME}/build/elysium-appd ${HOME}/elysium-appd
+COPY docker/priv_validator_state.json ${HOME}/data/priv_validator_state.json
+WORKDIR $HOME
+
+# p2p, rpc and prometheus port
+EXPOSE 26656 26657 1317 9090
+
+# This allows us to always set the --home directory using an env
+# var while still capturing all arguments passed at runtime
+ENTRYPOINT [ "/bin/bash", "-c", "exec ./elysium-appd \
+    --home ${HOME} \
+    \"${@}\"", "--" ]
+
+RUN adduser -D -u 1000 elysium \
+    && chown -R elysium:elysium /opt
+
+USER elysium
+
+# Default command to run if no arguments are passed
+CMD ["--help"]
