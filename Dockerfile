@@ -7,7 +7,7 @@ WORKDIR /elysium-app
 RUN make build
 
 # stage 2
-FROM alpine:3.17.1
+FROM alpine:3.18.2
 # hadolint ignore=DL3018
 RUN apk update && apk --no-cache add bash
 
